@@ -1,25 +1,34 @@
-.search-container {
-    margin-top: 1rem;
+.search-container-wrapper {
     width: 100%;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+.search-container {
+    margin-top: 1rem;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .search-input {
-    width: 90%;
+    width: 80%;
     max-width: 50rem;
     height: 2.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Adjusted to flex-start to align input and button */
     border: 2px solid rgba(71, 72, 73, 0.199);
     border-radius: 1.5rem;
     padding: 0 1rem;
 }
+
 .search-container input {
     width: 90%;
     max-width: 50rem;
@@ -34,6 +43,7 @@
     background-color: #ffffff;
     box-shadow: none;
     transition: all 0.3s ease;
+    margin-right: auto; /* Added to push the button to the right */
 }
 
 .search-category {
@@ -62,7 +72,6 @@
     border-radius: 2px;
 }
 
-
 .search-category button {
     width: 10rem;
     height: 2.5rem;
@@ -77,8 +86,46 @@
     margin: 0 0.5rem;
 }
 
+.search-filter {
+    width: 10rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.search-button {
+    width: 10rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 2px solid rgba(71, 72, 73, 0.199);
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 1rem;
+    font-family: 'Helvetica';
+    cursor: pointer;
+    margin: 0 0.5rem;
+}
+
 @media (max-width: 768px) {
+
+    .search-container-wrapper {
+        width: 90%;
+        max-width: 90%;
+        align-items: center;
+    }
+    
     .search-input {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 1rem;
+    }
+    .search-container {
+        width: 100%;
+    }
+    .search-category {
+        width: 80%;
+    }
+    .search-button {
         width: 80%;
     }
 }
