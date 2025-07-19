@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './search.css';
-
 
 interface SearchProps {
     query: string;
@@ -8,8 +7,9 @@ interface SearchProps {
     onCategory: (category: string) => void;
 }
 
-
 export default function Search(props: SearchProps): React.ReactElement {
+
+    const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
     const handleSearch = () => {
         const { onSearch } = props;
@@ -20,8 +20,11 @@ export default function Search(props: SearchProps): React.ReactElement {
 
     const handleCategory = (category: string) => {
         const { onCategory } = props;
+        setActiveCategory(category);
         onCategory(category);
     }
+
+    const categories = ['Todos', 'Eletrônicos', 'Celulares', 'Notebooks', 'Acessórios'];
 
     return (
         <div className="search-container-wrapper">  
@@ -31,19 +34,25 @@ export default function Search(props: SearchProps): React.ReactElement {
                     <input type="text" id="search-input" placeholder="Busque por um produto"/>
                 </div>
                 <div className="search-filter"> 
-                    <button className="search-button" onClick={() => handleSearch()}>
+                    <button className="search-button" onClick={handleSearch}>
                         Filtrar
                     </button>
                 </div>
             </div>
             <div className="search-category">
-                <button onClick={() => handleCategory('Todos')}>Todos</button>
-                <button onClick={() => handleCategory('Eletrônicos')}>Eletrônicos</button>
-                <button onClick={() => handleCategory('Celulares')}>Celulares</button>
-                <button onClick={() => handleCategory('Notebooks')}>Notebooks</button>
-                <button onClick={() => handleCategory('Acessórios')}>Acessórios</button>
+                {categories.map(category => (
+                    <button 
+                        key={category}
+                        onClick={() => handleCategory(category)} 
+                        style={{ 
+                            backgroundColor: activeCategory === category ? '#1d6ee9' : '#ffffff', 
+                            color: activeCategory === category ? '#ffffff' : '#000000' 
+                        }}
+                    >
+                        {category}
+                    </button>
+                ))}
             </div>
         </div>
-        
     );
 }
