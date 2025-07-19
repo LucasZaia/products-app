@@ -42,9 +42,26 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 1rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
 }
+
+.search-category::-webkit-scrollbar {
+    height: 4px;
+}
+
+.search-category::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.search-category::-webkit-scrollbar-thumb {
+    background-color: none;
+    border-radius: 2px;
+}
+
 
 .search-category button {
     width: 10rem;
@@ -58,4 +75,10 @@
     font-family: 'Helvetica';
     cursor: pointer;
     margin: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        width: 80%;
+    }
 }
