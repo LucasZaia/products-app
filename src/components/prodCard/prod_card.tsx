@@ -11,7 +11,7 @@ interface ProdCardProps {
   image: string;
 }
 
-export default function ProdCard(props: ProdCardProps): React.ReactElement {
+const ProdCard = React.memo((props: ProdCardProps): React.ReactElement => {
   return (
     <div className="container">
       <div className="card">
@@ -30,4 +30,6 @@ export default function ProdCard(props: ProdCardProps): React.ReactElement {
         </div>
     </div>
   );
-}
+});
+
+export default ProdCard;

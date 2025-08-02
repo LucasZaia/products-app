@@ -105,5 +105,4 @@ export const prodList = [
         image: 'https://www.mundoconectado.com.br/wp-content/uploads/2025/01/smart-tv-lg.jpg'
     }
     
-    
 ]
