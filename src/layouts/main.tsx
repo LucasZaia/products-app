@@ -6,9 +6,6 @@ import { createAllProducts } from '../data/Products/create_all';
 import './main.css';
 
 const Main = () => {
-  useEffect(() => {
-    createAllProducts();
-  }, []);
   
   return (
     <div className="main-layout">

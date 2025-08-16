@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
+import React, { use, useEffect, useMemo, useState } from 'react';
 import ProdCard from '../components/prodCard/prod_card';
 import Search from '../components/search/search';
 import NotFound from './not_found/not_found';
 import { useLoaderData } from 'react-router';
+import { ProductList } from '../interfaces/products_list';
 
 export default function ProdList(): React.ReactElement {
 
-    const prodList = useLoaderData() as { id: number, name: string, category: string, price: number, image: string }[];
+    const prodList = useLoaderData() as { id: number, name: string, description: string, price: number, category: string, pictureUrl: string }[];
+
+    const prodListMemo = useMemo(() => prodList, [prodList]);
+
+    const [filteredProducts, setFilteredProducts] = useState<ProductList[]>([]);
 
     const [search, setSearch] = useState('');
     const [category, setCategory] = useState('');
 
-    console.log(prodList);
-
       const filteredProdListByCategory = () => {
         if (category === 'Todos') {
-            return prodList;
+            return prodListMemo;
         } else {
-            return prodList.filter((prod) => prod.category.toLowerCase().includes(category.toLowerCase())) || [];
+            return prodListMemo.filter((prod) => prod.category.toLowerCase().includes(category.toLowerCase())) || [];
         }
     }
 
-    const filteredProdList = () => {
+    const filteredProdList = (filteredProducts: ProductList[]) => {
         const query = search.toLowerCase().trim();
 
-        return filteredProdListByCategory().filter((prod) => 
+        return filteredProducts.filter((prod) => 
             prod.id.toString().includes(query) ||
             prod.name.toLowerCase().includes(query) ||
             prod.category.toLowerCase().includes(query) ||
@@ -32,21 +35,30 @@ export default function ProdList(): React.ReactElement {
         ) || [];
     }
 
+    useEffect(() => {
+      setFilteredProducts(filteredProdListByCategory());
+      const interval = setTimeout(() => {
+        setFilteredProducts(filteredProdList(filteredProdListByCategory()));
+      }, 500);
+      return () => clearTimeout(interval);
+    }, [search, category]);
+
     return (
         <div>
             <Search query={search} onSearch={setSearch} onCategory={setCategory} />
             
-            {filteredProdList().map((prod) => (
+            {filteredProducts.map((prod) => (
                 <ProdCard 
                 key={prod.id} 
                 id={prod.id.toString()} 
+                description={prod.description}
                 name={prod.name} 
                 category={prod.category} 
                 price={prod.price} 
-                image={prod.image} />
+                image={prod.pictureUrl} />
             ))}
 
-            {filteredProdList().length === 0 && <NotFound />}
+            {filteredProducts.length === 0 && <NotFound />}
         </div>
     );
  }

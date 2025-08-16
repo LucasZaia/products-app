@@ -1,18 +1,18 @@
 import { Product } from "../../interfaces/products";
 import { getProducts } from "./list";
+import axios from 'axios';
 
 export const createProduct = async (product: Product) => {
-
-    const prodList = await getProducts();
-    const newProduct: Product = {
-        id: prodList.length + 1,
-        name: product.name,
-        category: product.category,
-        price: product.price,
-        image: product.image || ""
+    try {
+        const response = await axios.post(`http://localhost:8081/products/create`, JSON.stringify(product), {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+        return response.data.data.id;
+    } catch (error) {
+        console.error('Erro ao criar produto:', error);
+        return null;
     }
-
-    prodList.push(newProduct);
-    localStorage.setItem('prodList', JSON.stringify(prodList));
-    return newProduct;
 }

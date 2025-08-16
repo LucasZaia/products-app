@@ -1,9 +1,13 @@
+import axios from 'axios';
+
+
 export const getProducts = async () => {
-    const prodList = localStorage.getItem('prodList');
-    console.log(prodList);
-    if (prodList) {
-        return JSON.parse(prodList);
-    } else {
+    try {
+        const response = await axios.get(`http://localhost:8081/products`);
+        const prodList = response.data;
+        return prodList.data;
+    } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
         return [];
     }
 }

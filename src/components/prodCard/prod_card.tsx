@@ -8,6 +8,7 @@ interface ProdCardProps {
   name: string;
   category: string;
   price: number;
+  description: string;
   image: string;
 }
 
@@ -20,6 +21,7 @@ const ProdCard = React.memo((props: ProdCardProps): React.ReactElement => {
           </div>
           <div className="card-content">
               <h2>({props.id}) {props.name}</h2>
+              <p>{props.description}</p>
               <p>{props.category}</p>
               <p className="price">R$ {props.price}</p>
           </div>
