@@ -31,6 +31,7 @@ export const router = createBrowserRouter([
         loader: async () => {
           const categories = await getCategories();
           return { categories };
+        
         },
         action: async ({ request }) => {
           try {

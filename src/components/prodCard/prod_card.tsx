@@ -1,11 +1,14 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import './prod_card.css';
-
+import Modal from '../modal/modal';
+import { deleteProduct } from '../../data/Products/delete';
+import { useRevalidator } from 'react-router';
 
 interface ProdCardProps {
-  id: string;
+  id: number;
   name: string;
+  onDelete: (id: number) => void;
   category: string;
   price: number;
   description: string;
@@ -13,6 +16,16 @@ interface ProdCardProps {
 }
 
 const ProdCard = React.memo((props: ProdCardProps): React.ReactElement => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  }
+
   return (
     <div className="container">
       <div className="card">
@@ -27,9 +40,20 @@ const ProdCard = React.memo((props: ProdCardProps): React.ReactElement => {
           </div>
           <div className="card-button">
               <button className="edit-button">Editar</button>
-              <button className="delete-button">Excluir</button>
+              <button className="delete-button" onClick={handleOpenModal}>Excluir</button>
           </div>
         </div>
+        <Modal 
+        isOpen={isOpen} 
+        onClose={handleCloseModal} 
+        text="Tem certeza que deseja excluir este produto?" 
+        title="Excluir Produto" 
+        icon="lucide:trash" 
+        values={props.id} 
+        modalAction={() => {
+          props.onDelete(props.id);
+          setIsOpen(false);
+        }} />
     </div>
   );
 });

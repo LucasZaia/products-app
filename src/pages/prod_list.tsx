@@ -4,12 +4,15 @@ import Search from '../components/search/search';
 import NotFound from './not_found/not_found';
 import { useLoaderData } from 'react-router';
 import { ProductList } from '../interfaces/products_list';
+import { deleteProduct } from '../data/Products/delete';
+import { useRevalidator } from 'react-router';
 
 export default function ProdList(): React.ReactElement {
 
     const prodList = useLoaderData() as { id: number, name: string, description: string, price: number, category: string, pictureUrl: string }[];
 
     const prodListMemo = useMemo(() => prodList, [prodList]);
+    const revalidator = useRevalidator();
 
     const [filteredProducts, setFilteredProducts] = useState<ProductList[]>([]);
 
@@ -35,6 +38,11 @@ export default function ProdList(): React.ReactElement {
         ) || [];
     }
 
+    const onDelete = (id: number) => {
+        deleteProduct(id);
+        setFilteredProducts(filteredProducts.filter((prod) => prod.id !== id));
+    }
+
     useEffect(() => {
       setFilteredProducts(filteredProdListByCategory());
       const interval = setTimeout(() => {
@@ -50,7 +58,8 @@ export default function ProdList(): React.ReactElement {
             {filteredProducts.map((prod) => (
                 <ProdCard 
                 key={prod.id} 
-                id={prod.id.toString()} 
+                id={prod.id} 
+                onDelete={onDelete}
                 description={prod.description}
                 name={prod.name} 
                 category={prod.category} 
