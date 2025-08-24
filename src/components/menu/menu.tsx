@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './menu.css';
 import { Icon } from '@iconify/react';
 import logo from '../../assets/img/react_prods_white.png';
@@ -22,8 +22,17 @@ const Menu = () => {
             icon: 'lucide:plus-circle',
             text: 'Cadastro',
             path: '/cadastro-produto'
+        },
+        {
+            icon: 'lucide:import',
+            text: 'Importar',
+            path: '/importar-produtos'
         }
     ];
+
+    useEffect(() => {
+        setActiveItem(location.pathname);
+    }, [location.pathname]);
 
   return (
     <div className="menu-container">

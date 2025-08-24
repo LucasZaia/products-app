@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import './modal.css';
 import { Icon } from '@iconify/react';
+import ButtonAction from '../ui/button/buttonAction';
 
 interface ModalProps {
     isOpen: boolean;
@@ -26,8 +27,8 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, text, title, icon, values, mod
                 <h1 className="modal-title">{title}</h1>
                 <p className="modal-text">{text}</p>
                 <div className="modal-footer">
-                    <button className="modal-button" onClick={handleCloseModal}>Fechar</button>
-                    <button className="modal-button" onClick={(modalAction)}>Excluir</button>
+                    <ButtonAction onClick={handleCloseModal} text="Fechar" type="primary" format="small" border="rounded" submit={true} />
+                    <ButtonAction onClick={modalAction} text="Excluir" type="secondary" format="small" border="rounded" submit={false} />
                 </div>
             </div>
         </div>

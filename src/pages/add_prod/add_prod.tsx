@@ -4,7 +4,7 @@ import ProductsForm from '../../components/form/products'
 const AddProd = () => {
   return (
     <div className="add-prod-container">
-        <ProductsForm />
+        <ProductsForm type="create" />
     </div>
   )
 }

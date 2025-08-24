@@ -10,6 +10,7 @@ export const createProduct = async (product: Product) => {
                 'Accept': 'application/json'
             }
         });
+        console.log(response.data.data)
         return response.data.data.id;
     } catch (error) {
         console.error('Erro ao criar produto:', error);

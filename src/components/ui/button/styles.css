@@ -1,0 +1,66 @@
+.primary-button {
+    background-color: #1d6ee9;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.primary-button:hover {
+    background-color: #01a2ff;
+    transform: scale(1.05);
+}
+
+.primary-button:active {
+    background-color: #f37610;
+    transform: translateY(2px);
+}
+
+.secondary-button {
+    background-color: #e63946;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.secondary-button:hover {
+    background-color: #f31010;
+    transform: scale(1.05);
+}
+
+.secondary-button:active {
+    background-color: #f37610;
+    transform: translateY(2px);
+}
+
+.small-button {
+    min-width: 6rem;
+    height: 2rem;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.medium-button {
+    min-width: 8rem;
+    height: 2.5rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+}
+
+.large-button {
+    min-width: 10rem;
+    height: 3rem;
+    padding: 0.5rem 2rem;
+    font-size: 1.2rem;
+}
+
+.default-button {
+    border-radius: 0.2rem;
+}
+
+.rounded-button {
+    border-radius: 10rem;
+}

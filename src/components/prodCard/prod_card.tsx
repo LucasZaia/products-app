@@ -4,6 +4,9 @@ import './prod_card.css';
 import Modal from '../modal/modal';
 import { deleteProduct } from '../../data/Products/delete';
 import { useRevalidator } from 'react-router';
+import ButtonAction from '../ui/button/buttonAction';
+import { useNavigate } from 'react-router';
+import defaultImage from '../../assets/img/default.png';
 
 interface ProdCardProps {
   id: number;
@@ -17,7 +20,8 @@ interface ProdCardProps {
 
 const ProdCard = React.memo((props: ProdCardProps): React.ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
+  
   const handleOpenModal = () => {
     setIsOpen(true);
   }
@@ -26,11 +30,21 @@ const ProdCard = React.memo((props: ProdCardProps): React.ReactElement => {
     setIsOpen(false);
   }
 
+  const handleEdit = (id: number) => {
+    navigate(`/editar-produto/${id}`);
+  }
+
   return (
     <div className="container">
       <div className="card">
           <div className="card-image">
-              <img src={props.image} />
+              <img 
+                src={props.image || defaultImage} 
+                alt={props.name}
+                onError={(e) => {
+                  e.currentTarget.src = defaultImage;
+                }}
+              />
           </div>
           <div className="card-content">
               <h2>({props.id}) {props.name}</h2>
@@ -39,8 +53,8 @@ const ProdCard = React.memo((props: ProdCardProps): React.ReactElement => {
               <p className="price">R$ {props.price}</p>
           </div>
           <div className="card-button">
-              <button className="edit-button">Editar</button>
-              <button className="delete-button" onClick={handleOpenModal}>Excluir</button>
+              <ButtonAction onClick={() => {handleEdit(props.id)}} text="Editar" type="primary" format="small" border="rounded" />
+              <ButtonAction onClick={handleOpenModal} text="Excluir" type="secondary" format="small" border="rounded" />
           </div>
         </div>
         <Modal 

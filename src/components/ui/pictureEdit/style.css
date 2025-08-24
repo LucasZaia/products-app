@@ -1,0 +1,74 @@
+.picture-edit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.image-upload-area {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 2px solid #e0e0e0;
+}
+
+.image-upload-area:hover {
+  background-color: #f0f8ff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.image-preview-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.upload-placeholder {
+  text-align: center;
+}
+
+.upload-icon {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.upload-text {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.camera-icon {
+  color: #fff;
+}

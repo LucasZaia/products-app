@@ -1,9 +1,18 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
-// Fix for TextEncoder/TextDecoder in test environment
-global.TextEncoder = require('util').TextEncoder;
-global.TextDecoder = require('util').TextDecoder;
+import { TextEncoder, TextDecoder } from 'util';
+
+global.TextEncoder = TextEncoder as any;
+global.TextDecoder = TextDecoder as any;
+
+jest.mock('@iconify/react', () => ({
+  Icon: ({ icon, className, onClick, ...props }: any) => {
+    const MockIcon = require('react').createElement('div', {
+      className: `iconify-mock ${className || ''}`,
+      'data-icon': icon,
+      onClick,
+      ...props
+    });
+    return MockIcon;
+  }
+}));
